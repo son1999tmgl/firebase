@@ -1,0 +1,31 @@
+{
+    "user": [
+        {
+            "age": 18,
+            "name": "Tuan"
+        },
+        {
+            "age": 19,
+            "name": "son"
+        },
+        {
+            "age": 20,
+            "name": "hoa"
+        }
+    ],
+    "role": [
+        {
+            "name": "admin",
+            "code": "ADMIN"
+        },
+        {
+            "name": "user",
+            "code": "USER"
+        },
+        {
+            "name": "guest",
+            "code": "GUEST"
+        }
+
+    ]
+}
