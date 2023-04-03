@@ -1,41 +1,36 @@
 import { Component } from '@angular/core';
-import { AngularFireDatabase } from '@angular/fire/compat/database';
-import { Random } from 'random'
 
+import { AngularFireDatabase } from '@angular/fire/compat/database';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import firebase from 'firebase/compat/app';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
   title = 'firebase-app';
   items: any;
 
-  constructor(db: AngularFireDatabase) {
-    db.object('/user').valueChanges().subscribe(data => {
-      console.log(JSON.stringify(data));
-    });
+  constructor(private auth: AngularFireAuth) {}
 
-    //push
-    const u = {
-      name: "teo",
-      age: 3
-    }
-    // db.list("user").push(u)
-
-
-    // update
-    db.object("user/-NS4wKjtxjI-yAxLg2w6").update({age: 10, name: 19})
-
-
-    //remove
-    db.object("user/-NS4wKjtxjI-yAxLg2w6").remove()
-
-    //get
-    console.log(db.list('user'))
-    console.log(db.object('user/2'),'-----------');
-    
+  async signInWithFacebook() {
+    const provider = new firebase.auth.FacebookAuthProvider();
+    const credential = await this.auth.signInWithPopup(provider);
+    console.log(credential.user);
   }
 
+  async signInWithGoogle() {
+    
+    const provider = new firebase.auth.GoogleAuthProvider();
+    const credential = await this.auth.signInWithPopup(provider);
+    console.log(credential.user);
+  }
+
+  async logout() {
+    console.log('logout');
+    
+    await this.auth.signOut();
+  }
 }
